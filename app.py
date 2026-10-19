@@ -11,13 +11,11 @@ app.secret_key = "yilmaz_elektrik_gizli_anahtar"
 # GİRİŞ ŞİFRESİ
 SIFRE = "4072"
 
-# GITHUB AYARLARI (Render ortam değişkenlerinden otomatik alır)
+# GITHUB AYARLARI
 GITHUB_TOKEN = os.environ.get("GITHUB_TOKEN")
-GITHUB_REPO = os.environ.get(
-    "GITHUB_REPO"
-)  # Örn: "kullaniciadi/repo-adi"
+GITHUB_REPO = os.environ.get("GITHUB_REPO")
 GITHUB_BRANCH = os.environ.get("GITHUB_BRANCH", "main")
-DOSYA_YOLU = "ListeOZdisan.xlsx"  # Dosya adı aynı kalabilir
+DOSYA_YOLU = "ListeOZdisan.xlsx"
 
 
 def github_dosyayi_oku():
@@ -52,12 +50,11 @@ def github_dosyayi_oku():
 
 def github_dosyayi_kaydet(mesaj):
   if not (GITHUB_TOKEN and GITHUB_REPO):
-    return  # GitHub ayarlanmadıysa sadece lokalde çalışır
+    return
 
   url = f"https://api.github.com/repos/{GITHUB_REPO}/contents/{DOSYA_YOLU}"
   headers = {"Authorization": f"token {GITHUB_TOKEN}"}
 
-  # Mevcut dosyanın SHA değerini al
   get_resp = requests.get(url, headers=headers)
   sha = get_resp.json().get("sha") if get_resp.status_code == 200 else None
 
@@ -98,7 +95,6 @@ HTML_TEMPLATE = """
             </div>
         </header>
 
-        <!-- Arama -->
         <div class="bg-white p-4 rounded-xl shadow-md mb-6 flex flex-col md:flex-row gap-4 justify-between items-center">
             <form action="/" method="GET" class="w-full flex gap-2">
                 <input type="text" name="q" value="{{ request.args.get('q', '') }}" placeholder="Ürün Kodu, Üretici veya Açıklamada ara..." class="flex-grow border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
@@ -119,7 +115,6 @@ HTML_TEMPLATE = """
             {% endif %}
         {% endwith %}
 
-        <!-- Tablo -->
         <div class="bg-white rounded-xl shadow-md overflow-hidden">
             <div class="overflow-x-auto">
                 <table class="w-full text-left border-collapse">
@@ -260,7 +255,7 @@ HTML_TEMPLATE = """
     </script>
 </body>
 </html>
-'''
+"""
 
 LOGIN_TEMPLATE = """
 <!DOCTYPE html>
