@@ -279,7 +279,7 @@ LOGIN_TEMPLATE = """
 
         <form method="POST" class="space-y-4">
             <div>
-                <input type="password" name="sifre" placeholder="Şifre (4072)" required autofocus class="w-full border border-gray-300 rounded-lg px-4 py-3 text-center tracking-widest text-lg focus:ring-2 focus:ring-yellow-500 focus:outline-none">
+                <input type="password" name="sifre" placeholder="Şifre ( - - - -)" required autofocus class="w-full border border-gray-300 rounded-lg px-4 py-3 text-center tracking-widest text-lg focus:ring-2 focus:ring-yellow-500 focus:outline-none">
             </div>
             <button type="submit" class="w-full bg-yellow-500 hover:bg-yellow-600 text-white font-semibold py-3 rounded-lg transition shadow">Sisteme Giriş Yap</button>
         </form>
